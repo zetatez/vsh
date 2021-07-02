@@ -8,8 +8,7 @@ With VSH, we can take full advantage of the vim to interact with the terminal. F
 ![vsh](https://raw.githubusercontent.com/zetatez/vsh/main/pic/20210627022724.png)
 
 ### Installation
-- vim-plug is required 
-- Add following lines to your vimrc 
+- vim-plug 
 ```vim
 plug "zetatez/vsh"
 " let g:vsh_send_line = "<ENTER>"
@@ -17,18 +16,16 @@ plug "zetatez/vsh"
 " let g:vsh_exit = "<ESC><ESC>"
 " let g:vsh_exit_cmd = "qq"
 ```
-
+then
 ```bash
 vim +PlugInstall
 ```
 
-- Install vsh
+- install vsh
 ```bash
 git clone git@github.com:zetatez/vsh.git
 cd vsh
 sudo make install
-# To uninstall
-# sudo make uninstall
 ```
 
 ### Usage
