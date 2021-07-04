@@ -36,7 +36,7 @@ then
 vim +PlugInstall
 ```
 
-- install vsh
+- install vsh cli tool
 ```bash
 git clone git@github.com:zetatez/vsh.git
 cd vsh
