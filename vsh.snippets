@@ -49,11 +49,11 @@ ping ${1:www.baidu.com} $0
 endsnippet
 
 snippet get "http get" bwA
-curl -i -s -H "Content-Type:application/json" ${1:-d '{${2:"key": "value"}}'} https://$1$0
+curl -i -s -H "Content-Type:application/json" ${1:-d '{${2:"key": "value"}}'} https://$3$0
 endsnippet
 
 snippet post "http post" bwA
-curl -i -s -X POST -H "Content-Type:application/json" ${1:-d '{${2:"key": "value"}}'} https://$1$0
+curl -i -s -X POST -H "Content-Type:application/json" ${1:-d '{${2:"key": "value"}}'} https://$3$0
 endsnippet
 
 # cli app
