@@ -27,12 +27,17 @@ then
 	mkdir ~/.vsh
 fi
 
-filename=$(date +%Y%m%d.vsh)
-if ! [[ -e ~/.vsh/$filename ]] 
+today=$(date +%Y%m%d.vsh)
+if ! [[ -e ~/.vsh/$today ]] 
 then
-	touch ~/.vsh/$filename
+	touch ~/.vsh/$today
 fi
 
-# open at last line
-vim + ~/.vsh/$filename
+cur=$(date +%Y%m%dT%H%M%S.vsh)
+cp -f ~/.vsh/$today ~/.vsh/$cur
+
+# open file at last line
+vim + ~/.vsh/$cur
+
+mv -f ~/.vsh/$cur ~/.vsh/$today
 
