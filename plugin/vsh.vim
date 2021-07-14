@@ -47,7 +47,7 @@ function! VSHNewTerminalBuffer()
 endfunction
 
 
-function! VSHSend(...)
+function! VSHSendLine(...)
 	let l:cmd = a:1
 	call VSHNewTerminalBuffer()
 	if g:terminal_buffer
@@ -59,7 +59,7 @@ endfunction
 function! VSHSendRange(line_start, line_end)
     call VSHNewTerminalBuffer()
 	if g:terminal_buffer
-		call term_sendkeys(g:terminal_buffer, "clear;" . join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
+		call term_sendkeys(g:terminal_buffer, join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
 	endif
 endfunction
 
@@ -74,11 +74,11 @@ function! VSHSkipEmptyLine()
 endfunction
 
 
-function! VSHSendLine()
+function! VSHSendCurrentLine()
 	let g:end = line("$")
 	call VSHSkipEmptyLine()
 	let l:line = getline(".")
-	call VSHSend(l:line)
+	call VSHSendLine(l:line)
 	exe ":norm j0"
 	call VSHSkipEmptyLine()
 	exe ":norm zz"
@@ -91,21 +91,13 @@ function! VSHSendSelection()
         let l:j = col("'>") - i
         let l:l = getline("'<")
         let l:line = strpart(l:l, l:i, l:j)
-        call VSHSend(l:line)
+        call VSHSendLine(l:line)
 	endif
 	
     if line("'<") < line("'>")
 		let l:line_start = line("'<")
 		let l:line_end = line("'>")
 		call VSHSendRange(l:line_start, l:line_end)
-		" let l:line_cur = l:line_start 
-		" while l:line_cur <= l:line_end
-		" 	let l:line =  getline(l:line_cur)
-		" 	if strlen(l:line) != 0
-		" 		call VSHSend(l:line)
-		" 	endif
-		" 	let l:line_cur += 1
-		" endwhile	
 	endif
 endfunction
 
@@ -134,12 +126,12 @@ if !exists("g:vsh_exit_cmd")
     let g:vsh_exit_cmd= "qq"
 endif
 
-exe 'autocmd FileType vsh nnoremap ' . g:vsh_send_line . ' :call VSHSendLine()<CR>'
+exe 'autocmd FileType vsh nnoremap ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
 exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_selection . ' :call VSHSendSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_exit . ' :call VSHExit()<CR>'
 exe 'autocmd FileType vsh cnoremap ' . g:vsh_exit_cmd . ' :call VSHExit()<CR>'
 
-" autocmd FileType vsh nnoremap <ENTER> :call VSHSendLine()<CR>
+" autocmd FileType vsh nnoremap <ENTER> :call VSHSendCurrentLine()<CR>
 " autocmd FileType vsh vnoremap <ENTER> :call VSHSendSelection()<CR>
 " autocmd FileType vsh nnoremap <ESC><ESC> :call VSHExit()<CR>
 " autocmd FileType vsh cnoremap qq :call VSHExit()<CR>
