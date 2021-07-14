@@ -59,7 +59,7 @@ endfunction
 function! VSHSendRange(line_start, line_end)
     call VSHNewTerminalBuffer()
 	if g:terminal_buffer
-		call term_sendkeys(g:terminal_buffer, join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
+		call term_sendkeys(g:terminal_buffer, "clear;" . join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
 	endif
 endfunction
 
@@ -97,16 +97,15 @@ function! VSHSendSelection()
     if line("'<") < line("'>")
 		let l:line_start = line("'<")
 		let l:line_end = line("'>")
-		" call VSHSendRange(l:line_start, l:line_end)
-		let l:line_cur = l:line_start 
-		while l:line_cur <= l:line_end
-			let l:line =  getline(l:line_cur)
-			if strlen(l:line) != 0
-				call VSHSend(l:line)
-			endif
-			let l:line_cur += 1
-			execute "!sleep 1s"
-		endwhile	
+		call VSHSendRange(l:line_start, l:line_end)
+		" let l:line_cur = l:line_start 
+		" while l:line_cur <= l:line_end
+		" 	let l:line =  getline(l:line_cur)
+		" 	if strlen(l:line) != 0
+		" 		call VSHSend(l:line)
+		" 	endif
+		" 	let l:line_cur += 1
+		" endwhile	
 	endif
 endfunction
 
