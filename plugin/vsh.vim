@@ -123,7 +123,7 @@ endif
 
 if !exists("g:vsh_send_selection")
     let g:vsh_send_selection= "<ENTER>"
-endif;
+endif
 
 if !exists("g:vsh_exit")
     let g:vsh_exit= "<ESC><ESC>"
