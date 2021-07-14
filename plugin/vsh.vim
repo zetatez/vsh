@@ -108,11 +108,11 @@ endfunction
 
 
 if !exists("g:vsh_send_line")
-    let g:vsh_send_line = "<ENTER>"
+    let g:vsh_send_line = "<ESC>"
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<ENTER> "
+    let g:vsh_send_selection= "<ESC> "
 endif
 
 if !exists("g:vsh_exit")
