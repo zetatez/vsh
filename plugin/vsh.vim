@@ -94,17 +94,17 @@ endfunction
 
 
 function! VSHSendSelection()
-    if line("'<") == line("'>")
-		let b:line = getline(".")
-		if strlen(b:line) != 0
-			call VSHSend(b:line)
-		endif
-    else
+    " if line("'<") == line("'>")
+		" let b:line = getline(".")
+		" if strlen(b:line) != 0
+			" call VSHSend(b:line)
+		" endif
+    " else
 		let b:line_start = line("'<")
 		let b:line_end = line("'>")
 
 		let b:line_cur = b:line_start 
-		while b:line_cur < b:line_end
+		while b:line_cur <= b:line_end
 			let b:line =  getline(b:line_cur)
 			if strlen(b:line) != 0
 				call VSHSend(b:line)
@@ -113,7 +113,7 @@ function! VSHSendSelection()
 		endwhile	
 
 		" call VSHSendRange(b:line_start, b:line_end)
-    endif
+    " endif
 endfunction
 
 
