@@ -104,7 +104,7 @@ function! VSHSendSelection()
 		let b:line_end = line("'>")
 
 		let b:line_cur = b:line_start 
-		while a:line_cur < b:line_end
+		while b:line_cur < b:line_end
 			let b:line =  getline(b:line_cur)
 			if strlen(b:line) != 0
 				call VSHSend(b:line)
