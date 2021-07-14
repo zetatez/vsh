@@ -49,9 +49,7 @@ endfunction
 
 function! VSHSend(...)
 	let b:cmd = a:1
-
 	call VSHNewTerminalBuffer()
-	
 	if g:terminal_buffer
 		call term_sendkeys(g:terminal_buffer, b:cmd . "\<cr>")
 	endif
@@ -98,17 +96,23 @@ endfunction
 function! VSHSendSelection()
     if line("'<") == line("'>")
 		let b:line = getline(".")
-        " let b:i = col("'<") - 1
-        " let b:j = col("'>") - i
-        " let b:l = getline("'<")
-        " let b:line = strpart(b:l, b:i, b:j)
 		if strlen(b:line) != 0
 			call VSHSend(b:line)
 		endif
     else
 		let b:line_start = line("'<")
 		let b:line_end = line("'>")
-		call VSHSendRange(b:line_start, b:line_end)
+
+		let b:line_cur = b:line_start 
+		while b:line_cur < b:line_end
+			b:line =  getline(b:line_cur)
+			if strlen(b:line) != 0
+				call VSHSend(b:line)
+			endif
+			let b:line_cur = b:line_cur + 1
+		endwhile	
+
+		" call VSHSendRange(b:line_start, b:line_end)
     endif
 endfunction
 
