@@ -97,10 +97,11 @@ endfunction
 
 function! VSHSendSelection()
     if line("'<") == line("'>")
-        let b:i = col("'<") - 1
-        let b:j = col("'>") - i
-        let b:l = getline("'<")
-        let b:line = strpart(b:l, b:i, b:j)
+		let b:line = getline(".")
+        " let b:i = col("'<") - 1
+        " let b:j = col("'>") - i
+        " let b:l = getline("'<")
+        " let b:line = strpart(b:l, b:i, b:j)
 		if strlen(b:line) != 0
 			call VSHSend(b:line)
 		endif
