@@ -97,15 +97,16 @@ function! VSHSendSelection()
     if line("'<") < line("'>")
 		let l:line_start = line("'<")
 		let l:line_end = line("'>")
-		call VSHSendRange(l:line_start, l:line_end)
-		" let l:line_cur = l:line_start 
-		" while l:line_cur <= l:line_end
-		" 	let l:line =  getline(l:line_cur)
-		" 	if strlen(l:line) != 0
-		" 		call VSHSend(l:line)
-		" 	endif
-		" 	let l:line_cur += 1
-		" endwhile	
+		" call VSHSendRange(l:line_start, l:line_end)
+		let l:line_cur = l:line_start 
+		while l:line_cur <= l:line_end
+			let l:line =  getline(l:line_cur)
+			if strlen(l:line) != 0
+				call VSHSend(l:line)
+			endif
+			let l:line_cur += 1
+			execute "!sleep 1s"
+		endwhile	
 	endif
 endfunction
 
