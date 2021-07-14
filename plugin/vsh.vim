@@ -94,15 +94,8 @@ endfunction
 
 
 function! VSHSendSelection()
-    " if line("'<") == line("'>")
-		" let b:line = getline(".")
-		" if strlen(b:line) != 0
-			" call VSHSend(b:line)
-		" endif
-    " else
 		let b:line_start = line("'<")
 		let b:line_end = line("'>")
-
 		let b:line_cur = b:line_start 
 		while b:line_cur <= b:line_end
 			let b:line =  getline(b:line_cur)
@@ -111,9 +104,6 @@ function! VSHSendSelection()
 			endif
 			let b:line_cur += 1
 		endwhile	
-
-		" call VSHSendRange(b:line_start, b:line_end)
-    " endif
 endfunction
 
 
@@ -130,7 +120,7 @@ if !exists("g:vsh_send_line")
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<ENTER>"
+    let g:vsh_send_selection= "<C><ENTER>"
 endif
 
 if !exists("g:vsh_exit")
