@@ -124,8 +124,7 @@ if !exists("g:vsh_exit_cmd")
 endif
 
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
-" exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_selection . ' :call VSHSendSelection()<CR>'
-autocmd FileType vsh vnoremap g:vsh_send_selection :call VSHSendSelection<CR>
+exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_selection . ' :call VSHSendSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_exit . ' :call VSHExit()<CR>'
 exe 'autocmd FileType vsh cnoremap ' . g:vsh_exit_cmd . ' :call VSHExit()<CR>'
 
