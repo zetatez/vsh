@@ -67,7 +67,8 @@ endfunction
 function! VSHSkipEmptyLine()
 	let l:line = getline(".")
 	let l:lineidx = line(".")
-	if strlen(l:line) == 0 && l:lineidx < g:end
+	let l:end = line("$")
+	if strlen(l:line) == 0 && l:lineidx < l:end
 		exe ":norm j0"
 		call VSHSkipEmptyLine()
 	endif
@@ -75,7 +76,7 @@ endfunction
 
 
 function! VSHSendCurrentLine()
-	let g:end = line("$")
+	let l:end = line("$")
 	call VSHSkipEmptyLine()
 	let l:line = getline(".")
 	call VSHSendLine(l:line)
@@ -88,16 +89,12 @@ endfunction
 function! VSHSendSelection()
     if line("'<") == line("'>")
         let l:i = col("'<") - 1
-        let l:j = col("'>") - i
+        let l:j = col("'>") - l:i
         let l:l = getline("'<")
         let l:line = strpart(l:l, l:i, l:j)
         call VSHSendLine(l:line)
-	endif
-	
-    if line("'<") < line("'>")
-		let l:line_start = line("'<")
-		let l:line_end = line("'>")
-		call VSHSendRange(l:line_start, l:line_end)
+	else
+		call VSHSendRange(line("'<"), line("'>"))
 	endif
 endfunction
 
