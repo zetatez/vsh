@@ -104,12 +104,12 @@ function! VSHSendSelection()
 		let b:line_end = line("'>")
 
 		let b:line_cur = b:line_start 
-		while b:line_cur < b:line_end
-			b:line =  getline(b:line_cur)
+		while a:line_cur < b:line_end
+			let b:line =  getline(b:line_cur)
 			if strlen(b:line) != 0
 				call VSHSend(b:line)
 			endif
-			let b:line_cur = b:line_cur + 1
+			let b:line_cur += 1
 		endwhile	
 
 		" call VSHSendRange(b:line_start, b:line_end)
