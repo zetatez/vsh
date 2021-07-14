@@ -48,26 +48,26 @@ endfunction
 
 
 function! VSHSend(...)
-	let b:cmd = a:1
+	let l:cmd = a:1
 	call VSHNewTerminalBuffer()
 	if g:terminal_buffer
-		call term_sendkeys(g:terminal_buffer, b:cmd . "\<cr>")
+		call term_sendkeys(g:terminal_buffer, l:cmd . "\<cr>")
 	endif
 endfunction
 
 
-function! VSHSendRange(line_start, line_end)
-    call VSHNewTerminalBuffer()
-	if g:terminal_buffer
-		call term_sendkeys(g:terminal_buffer, join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
-	endif
-endfunction
+" function! VSHSendRange(line_start, line_end)
+"     call VSHNewTerminalBuffer()
+" 	if g:terminal_buffer
+" 		call term_sendkeys(g:terminal_buffer, join(getline(a:line_start, a:line_end), "\<cr>") . "\<cr>")
+" 	endif
+" endfunction
 
 
 function! VSHSkipEmptyLine()
-	let b:line = getline(".")
-	let b:lineidx = line(".")
-	if strlen(b:line) == 0 && b:lineidx < g:end
+	let l:line = getline(".")
+	let l:lineidx = line(".")
+	if strlen(l:line) == 0 && l:lineidx < g:end
 		exe ":norm j0"
 		call VSHSkipEmptyLine()
 	endif
@@ -77,33 +77,35 @@ endfunction
 function! VSHSendLine()
 	let g:end = line("$")
 	call VSHSkipEmptyLine()
-	let b:line = getline(".")
-	call VSHSend(b:line)
+	let l:line = getline(".")
+	call VSHSend(l:line)
 	exe ":norm j0"
 	call VSHSkipEmptyLine()
 	exe ":norm zz"
 endfunction
 
 
-function! VSHSendLineAndStay()
-    let b:line = getline(".")
-    if strlen(b:line) > 0
-		call VSHSend(b:line)
-    endif
-endfunction
-
-
 function! VSHSendSelection()
-		let b:line_start = line("'<")
-		let b:line_end = line("'>")
-		let b:line_cur = b:line_start 
-		while b:line_cur <= b:line_end
-			let b:line =  getline(b:line_cur)
-			if strlen(b:line) != 0
-				call VSHSend(b:line)
+    if line("'<") == line("'>")
+        let l:i = col("'<") - 1
+        let l:j = col("'>") - i
+        let l:l = getline("'<")
+        let l:line = strpart(l:l, l:i, l:j)
+        call VSHSend(l:line)
+	endif
+	
+    if line("'<") < line("'>")
+		let l:line_start = line("'<")
+		let l:line_end = line("'>")
+		let l:line_cur = l:line_start 
+		while l:line_cur < l:line_end
+			let l:line =  getline(l:line_cur)
+			if strlen(l:line) != 0
+				call VSHSend(l:line)
 			endif
-			let b:line_cur += 1
+			let l:line_cur += 1
 		endwhile	
+	endif
 endfunction
 
 
@@ -120,8 +122,8 @@ if !exists("g:vsh_send_line")
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<C><ENTER>"
-endif
+    let g:vsh_send_selection= "<ENTER>"
+endif;
 
 if !exists("g:vsh_exit")
     let g:vsh_exit= "<ESC><ESC>"
