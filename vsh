@@ -39,26 +39,27 @@ DESCRIPTION
 	x is a vim shell.
 
 	The options are as follows:
-	-a  attach to exit session  
-		 vsh -a num
+	-a  attach to tmux session  
+		vsh -a num
 
-	-d  dettach to exit session  
-		 vsh -d num
+	-d  dettach from tmux session  
+		vsh -d num
 	
-	-k  kill to exit session  
-		 vsh -k num
+	-k  kill tmux session  
+		vsh -k num
 
-	-l  list all sessions 
-		 vsh -l
+	-l  list all tmux sessions 
+		vsh -l
 
 	-h  help 
-		 vsh -h
+		vsh -h
 
 AUTHOR
 	Lorenzo<zetatez@icloud.com>
 
 LICENSE	
 	MIT
+
 "|less
     exit 0
 }

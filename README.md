@@ -63,16 +63,16 @@ vsh -h
     # 	x is a vim shell.
     # 
     # 	The options are as follows:
-    # 	-a  attach to exit session  
+    # 	-a  attach to tmux session  
     # 		vsh -a num
     # 
-    # 	-d  dettach to exit session  
+    # 	-d  dettach from tmux session  
     # 		vsh -d num
     # 	
-    # 	-k  kill to exit session  
+    # 	-k  kill tmux session  
     # 		vsh -k num
     # 
-    # 	-l  list all sessions 
+    # 	-l  list all tmux sessions 
     # 		vsh -l
     # 
     # 	-h  help 
@@ -83,6 +83,7 @@ vsh -h
     # 
     # LICENSE	
     # 	MIT
+    # 
 
 vsh
 
