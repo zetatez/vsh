@@ -107,7 +107,7 @@ function! VSHSendSelection()
 	endif
 endfunction
 
-function! VSHSendSelectionBySource(lines)
+function! VSHSendSelectionBySource()
     if line("'<") == line("'>")
         let l:i = col("'<") - 1
         let l:j = col("'>") - l:i
