@@ -146,7 +146,7 @@ if !exists("g:vsh_exit_cmd")
 endif
 
 exe 'autocmd FileType vsh nnoremap <silent><buffer> ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
-exe 'autocmd FileType vsh vnoremap <silent><buffer> ' . g:vsh_send_selection . ' <ESC>:call VSHSendSelection()'
+exe 'autocmd FileType vsh vnoremap <silent><buffer> ' . g:vsh_send_selection . ' <ESC>:call VSHSendSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap <silent><buffer> ' . g:vsh_exit . ' :call VSHQuit()<CR>'
 exe 'autocmd FileType vsh cnoremap <silent><buffer> ' . g:vsh_exit_cmd . ' :call VSHQuit()<CR>'
 
