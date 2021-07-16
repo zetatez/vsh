@@ -103,14 +103,12 @@ endfunction
 "         let l:l = getline("'<")
 "         let l:line = strpart(l:l, l:i, l:j)
 "         call VSHSendLine(l:line)
-" 	else
-" 		call VSHSendRange(line("'<"), line("'>"))
 " 	endif
 " endfunction
 
 
 function! VSHSendSelection()
-	exe ":norm gv"
+	" exe ":norm gv"
     if line("'<") == line("'>")
         let l:i = col("'<") - 1
         let l:j = col("'>") - l:i
@@ -148,12 +146,12 @@ if !exists("g:vsh_exit_cmd")
 endif
 
 exe 'autocmd FileType vsh nnoremap <silent><buffer> ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
-exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_selection . ' :call VSHSendSelection()<CR>'
+exe 'vnoremap <silent><buffer> ' . g:vsh_send_selection . ' <ESC>:call VSHSendSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap <silent><buffer> ' . g:vsh_exit . ' :call VSHQuit()<CR>'
 exe 'autocmd FileType vsh cnoremap <silent><buffer> ' . g:vsh_exit_cmd . ' :call VSHQuit()<CR>'
 
 " autocmd FileType vsh nnoremap <ENTER> :call VSHSendCurrentLine()<CR>
-" autocmd FileType vsh vnoremap <ENTER> :call VSHSendCurrentLineSelection()<CR>
+" autocmd FileType vsh vnoremap <ENTER> :call VSHSendSelection()<CR>
 " autocmd FileType vsh nnoremap <ESC><ESC> :call VSHQuit()<CR>
 " autocmd FileType vsh cnoremap qq :call VSHQuit()<CR>
 
