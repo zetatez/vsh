@@ -103,6 +103,8 @@ function! VSHSendCurrentLineSelection()
         let l:l = getline("'<")
         let l:line = strpart(l:l, l:i, l:j)
         call VSHSendLine(l:line)
+	else
+		call VSHSendRange(line("'<"), line("'>"))
 	endif
 endfunction
 
@@ -145,7 +147,7 @@ if !exists("g:vsh_exit_cmd")
 endif
 
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
-exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_current_line_selection . ' :<BS><BS><BS><BS><BS>call VSHSendCurrentLineSelection()<CR>'
+exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_current_line_selection . '<ESC>:call VSHSendCurrentLineSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_exit . ' :call VSHQuit()<CR>'
 exe 'autocmd FileType vsh cnoremap ' . g:vsh_exit_cmd . ' :call VSHQuit()<CR>'
 
