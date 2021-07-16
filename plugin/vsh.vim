@@ -103,7 +103,17 @@ function! VSHSendSelection()
         let l:line = strpart(l:l, l:i, l:j)
         call VSHSendLine(l:line)
 	else
-		call VSHSendRange(line("'<"), line("'>"))
+		" call VSHSendRange(line("'<"), line("'>"))
+		
+		let l:line_start = line("'<")
+		let l:line_end = line("'>")
+		while l:line_start < l:line_end
+			call cursor(l:line_start, 1)
+			let l:line = getline(".")
+			call VSHSendLine(l:line)
+			let l:line_start += 1
+		endwhile
+
 	endif
 endfunction
 
