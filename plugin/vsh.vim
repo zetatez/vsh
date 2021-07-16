@@ -139,11 +139,11 @@ endfunction
 
 
 if !exists("g:vsh_send_line")
-    let g:vsh_send_line = "<ENTER>"
+    let g:vsh_send_line = "<C-P>"
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<ENTER>"
+    let g:vsh_send_selection= "<C-P>"
 endif
 
 if !exists("g:vsh_exit")
