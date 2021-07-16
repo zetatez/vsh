@@ -107,7 +107,7 @@ function! VSHSendSelection()
 		
 		let l:line_start = line("'<")
 		let l:line_end = line("'>")
-		while l:line_start < l:line_end
+		while l:line_start <= l:line_end
 			call cursor(l:line_start, 1)
 			let l:line = getline(".")
 			call VSHSendLine(l:line)
