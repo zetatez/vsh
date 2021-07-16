@@ -75,6 +75,16 @@ function! VSHSkipEmptyLine()
 endfunction
 
 
+" function VSHSendCurrentLineAndGoToNextLine()
+" 	let l:line = getline(".")
+" 	if strlen(l:line) > 0
+" 		call VSHSendLine(l:line)
+" 		exe ":norm j0"
+" 		exe ":norm zz"
+"     endif
+" endfunction
+
+
 function! VSHSendCurrentLine()
 	let l:lastline = line("$")
 	call VSHSkipEmptyLine()
@@ -83,16 +93,6 @@ function! VSHSendCurrentLine()
 	exe ":norm j0"
 	call VSHSkipEmptyLine()
 	exe ":norm zz"
-endfunction
-
-
-function VSHSendCurrentLineAndGoToNextLine()
-	let l:line = getline(".")
-	if strlen(l:line) > 0
-		call VSHSendLine(l:line)
-		exe ":norm j0"
-		exe ":norm zz"
-    endif
 endfunction
 
 
@@ -118,20 +118,6 @@ function! VSHSendSelection()
 		call VSHSendRange(line("'<"), line("'>"))
 	endif
 endfunction
-
-
-" function! VSHSendSelection()
-"     if line("'<") == line("'>")
-"         let l:i = col("'<") - 1
-"         let l:j = col("'>") - l:i
-"         let l:l = getline("'<")
-"         let l:line = strpart(l:l, l:i, l:j)
-"         call VSHSendLine(l:line)
-" 	else
-" 		call writefile(getline("'<", "'>"), "/tmp/vsh.sh")
-" 		call VSHSendLine("/tmp/vsh.sh")
-" 	endif
-" endfunction
 
 
 function! VSHQuit()
@@ -167,6 +153,5 @@ exe 'autocmd FileType vsh cnoremap ' . g:vsh_exit_cmd . ' :call VSHQuit()<CR>'
 " autocmd FileType vsh vnoremap <ENTER> :call VSHSendCurrentLineSelection()<CR>
 " autocmd FileType vsh nnoremap <ESC><ESC> :call VSHQuit()<CR>
 " autocmd FileType vsh cnoremap qq :call VSHQuit()<CR>
-" manually exec :call VSHSendSelection()
 
 

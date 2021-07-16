@@ -14,7 +14,7 @@ With VSH, we can take full advantage of the vim to interact with the terminal. W
 """""" vsh
 plug "zetatez/vsh"
 " let g:vsh_send_line = "<ENTER>"
-" let g:vsh_send_selection= "<ENTER>"
+" let g:vsh_send_current_line_selection= "<ENTER>"
 " let g:vsh_exit = "<ESC><ESC>"
 " let g:vsh_exit_cmd = "qq"
 
@@ -59,7 +59,7 @@ vsh
 Hints,
 ```
 normal mode, `<ENTER>`      send current line to the terminal
-visual mode, `<ENTER>`      send selected lines to the terminal
+visual mode, `<ENTER>`      send current line selection to the terminal
 normal mode, `<ESC><ESC>`   quit vsh
 cli    mode, `:qq`          quit vsh
 ```
