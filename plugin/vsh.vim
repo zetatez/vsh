@@ -75,16 +75,6 @@ function! VSHSkipEmptyLine()
 endfunction
 
 
-" function VSHSendCurrentLineAndGoToNextLine()
-" 	let l:line = getline(".")
-" 	if strlen(l:line) > 0
-" 		call VSHSendLine(l:line)
-" 		exe ":norm j0"
-" 		exe ":norm zz"
-"     endif
-" endfunction
-
-
 function! VSHSendCurrentLine()
 	let l:lastline = line("$")
 	call VSHSkipEmptyLine()
