@@ -14,7 +14,7 @@ With VSH, we can take full advantage of the vim to interact with the terminal. W
 """""" vsh
 plug "zetatez/vsh"
 " let g:vsh_send_line = "<ENTER>"
-" let g:vsh_send_current_line_selection= "<ENTER>"
+" let g:vsh_send_selection= "<ENTER>"
 " let g:vsh_exit = "<ESC><ESC>"
 " let g:vsh_exit_cmd = "qq"
 
@@ -52,16 +52,48 @@ cp vsh.snippets ~/.ultisnips/
 ### Usage
 Here we go !
 ```bash
+vsh -h
+    # NAME
+    # 	vsh - vim shell 
+    # 
+    # SYNOPSIS
+    # 	vsh [-a num] [-d num] [-k num] [-l] [-h]
+    # 
+    # DESCRIPTION
+    # 	x is a vim shell.
+    # 
+    # 	The options are as follows:
+    # 	-a  attach to exit session  
+    # 		vsh -a num
+    # 
+    # 	-d  dettach to exit session  
+    # 		vsh -d num
+    # 	
+    # 	-k  kill to exit session  
+    # 		vsh -k num
+    # 
+    # 	-l  list all sessions 
+    # 		vsh -l
+    # 
+    # 	-h  help 
+    # 		vsh -h
+    # 
+    # AUTHOR
+    # 	Lorenzo<zetatez@icloud.com>
+    # 
+    # LICENSE	
+    # 	MIT
+
 vsh
 
 ```
 
 Hints,
 ```
-normal mode, `<ENTER>`      send current line to the terminal
-visual mode, `<ENTER>`      send current line selection to the terminal
-normal mode, `<ESC><ESC>`   quit vsh
-cli    mode, `:qq`          quit vsh
+normal mode    `<ENTER>`      send current line to the terminal
+visual mode    `<ENTER>`      send selected lines to the terminal
+normal mode    `<ESC><ESC>`   quit vsh
+cli    mode    `:qq`          quit vsh
 ```
 
 ### One more tip !
