@@ -110,6 +110,7 @@ endfunction
 
 
 function! VSHSendSelection()
+	exe ":norm gv"
     if line("'<") == line("'>")
         let l:i = col("'<") - 1
         let l:j = col("'>") - l:i
