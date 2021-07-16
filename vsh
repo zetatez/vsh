@@ -36,7 +36,7 @@ SYNOPSIS
 	vsh [-a num] [-d num] [-k num] [-l] [-h]
 
 DESCRIPTION
-	x is a vim shell.
+	vsh is a vim shell.
 
 	The options are as follows:
 	-a  attach to tmux session  

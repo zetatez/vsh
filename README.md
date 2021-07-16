@@ -7,6 +7,9 @@ With VSH, we can take full advantage of the vim to interact with the terminal. W
 
 ![vsh](https://raw.githubusercontent.com/zetatez/vsh/main/pic/20210627022724.png)
 
+### Requirements
+- [tmux](https://github.com/tmux/tmux)
+
 ### Installation
 - vim-plug is required, add following lines to your vim-plug session of your vimrc file.
 ```vim
@@ -60,7 +63,7 @@ vsh -h
     # 	vsh [-a num] [-d num] [-k num] [-l] [-h]
     # 
     # DESCRIPTION
-    # 	x is a vim shell.
+    # 	vsh is a vim shell.
     # 
     # 	The options are as follows:
     # 	-a  attach to tmux session  
@@ -83,7 +86,6 @@ vsh -h
     # 
     # LICENSE	
     # 	MIT
-    # 
 
 vsh
 
