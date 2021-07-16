@@ -46,6 +46,7 @@ function! VSHNewTerminalBuffer()
 	endif
 endfunction
 
+
 function! VSHSendLine(...)
 	let l:cmd = a:1
 	call VSHNewTerminalBuffer()
@@ -95,17 +96,15 @@ function VSHSendCurrentLineAndGoToNextLine()
 endfunction
 
 
-" function! VSHSendSelection()
-"     if line("'<") == line("'>")
-"         let l:i = col("'<") - 1
-"         let l:j = col("'>") - l:i
-"         let l:l = getline("'<")
-"         let l:line = strpart(l:l, l:i, l:j)
-"         call VSHSendLine(l:line)
-" 	else
-" 		call VSHSendRange(line("'<"), line("'>"))
-" 	endif
-" endfunction
+function! VSHSendCurrentLineSelection()
+    if line("'<") == line("'>")
+        let l:i = col("'<") - 1
+        let l:j = col("'>") - l:i
+        let l:l = getline("'<")
+        let l:line = strpart(l:l, l:i, l:j)
+        call VSHSendLine(l:line)
+	endif
+endfunction
 
 
 function! VSHSendSelection()
@@ -116,10 +115,23 @@ function! VSHSendSelection()
         let l:line = strpart(l:l, l:i, l:j)
         call VSHSendLine(l:line)
 	else
-		call writefile(getline("'<", "'>"), "/tmp/vsh.sh")
-		call VSHSendLine("/tmp/vsh.sh")
+		call VSHSendRange(line("'<"), line("'>"))
 	endif
 endfunction
+
+
+" function! VSHSendSelection()
+"     if line("'<") == line("'>")
+"         let l:i = col("'<") - 1
+"         let l:j = col("'>") - l:i
+"         let l:l = getline("'<")
+"         let l:line = strpart(l:l, l:i, l:j)
+"         call VSHSendLine(l:line)
+" 	else
+" 		call writefile(getline("'<", "'>"), "/tmp/vsh.sh")
+" 		call VSHSendLine("/tmp/vsh.sh")
+" 	endif
+" endfunction
 
 
 function! VSHQuit()
@@ -134,8 +146,8 @@ if !exists("g:vsh_send_line")
     let g:vsh_send_line = "<ENTER>"
 endif
 
-if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<ENTER>"
+if !exists("g:vsh_send_current_line_selection")
+    let g:vsh_send_current_line_selection= "<ENTER>"
 endif
 
 if !exists("g:vsh_exit")
@@ -147,12 +159,14 @@ if !exists("g:vsh_exit_cmd")
 endif
 
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_send_line . ' :call VSHSendCurrentLine()<CR>'
-exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_selection . ' :call VSHSendSelection()<CR>'
+exe 'autocmd FileType vsh vnoremap ' . g:vsh_send_current_line_selection . ' :call VSHSendCurrentLineSelection()<CR>'
 exe 'autocmd FileType vsh nnoremap ' . g:vsh_exit . ' :call VSHQuit()<CR>'
 exe 'autocmd FileType vsh cnoremap ' . g:vsh_exit_cmd . ' :call VSHQuit()<CR>'
 
 " autocmd FileType vsh nnoremap <ENTER> :call VSHSendCurrentLine()<CR>
-" autocmd FileType vsh vnoremap <ENTER> :call VSHSendSelection()<CR>
+" autocmd FileType vsh vnoremap <ENTER> :call VSHSendCurrentLineSelection()<CR>
 " autocmd FileType vsh nnoremap <ESC><ESC> :call VSHQuit()<CR>
 " autocmd FileType vsh cnoremap qq :call VSHQuit()<CR>
+" manually exec :call VSHSendSelection()
+
 
