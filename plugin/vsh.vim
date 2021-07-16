@@ -95,6 +95,19 @@ function VSHSendCurrentLineAndGoToNextLine()
 endfunction
 
 
+" function! VSHSendSelection()
+"     if line("'<") == line("'>")
+"         let l:i = col("'<") - 1
+"         let l:j = col("'>") - l:i
+"         let l:l = getline("'<")
+"         let l:line = strpart(l:l, l:i, l:j)
+"         call VSHSendLine(l:line)
+" 	else
+" 		call VSHSendRange(line("'<"), line("'>"))
+" 	endif
+" endfunction
+
+
 function! VSHSendSelection()
     if line("'<") == line("'>")
         let l:i = col("'<") - 1
@@ -103,32 +116,11 @@ function! VSHSendSelection()
         let l:line = strpart(l:l, l:i, l:j)
         call VSHSendLine(l:line)
 	else
-		" call VSHSendRange(line("'<"), line("'>"))
-		
-		let l:line_start = line("'<")
-		let l:line_end = line("'>")
-		while l:line_start <= l:line_end
-			call cursor(l:line_start, 1)
-			let l:line = getline(".")
-			call VSHSendLine(l:line)
-			let l:line_start += 1
-		endwhile
-
+		call writefile(getline("'<", "'>"), "/tmp/vsh.sh")
+		call VSHSendLine("/tmp/vsh.sh")
 	endif
 endfunction
 
-" function! VSHSendSelectionBySource()
-"     if line("'<") == line("'>")
-"         let l:i = col("'<") - 1
-"         let l:j = col("'>") - l:i
-"         let l:l = getline("'<")
-"         let l:line = strpart(l:l, l:i, l:j)
-"         call VSHSendLine(l:line)
-" 	else
-" 		call writefile(getline("'<", "'>"), "/tmp/vsh.sh")
-" 		call VSHSendLine("/tmp/vsh.sh")
-" 	endif
-" endfunction
 
 function! VSHQuit()
 	if g:terminal_buffer
@@ -139,11 +131,11 @@ endfunction
 
 
 if !exists("g:vsh_send_line")
-    let g:vsh_send_line = "<C-P>"
+    let g:vsh_send_line = "<ENTER>"
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<C-P>"
+    let g:vsh_send_selection= "<ENTER>"
 endif
 
 if !exists("g:vsh_exit")
