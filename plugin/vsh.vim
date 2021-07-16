@@ -133,7 +133,7 @@ if !exists("g:vsh_send_line")
 endif
 
 if !exists("g:vsh_send_selection")
-    let g:vsh_send_selection= "<ENTER>"
+    let g:vsh_send_selection= "<C-P>"
 endif
 
 if !exists("g:vsh_exit")
