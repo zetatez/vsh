@@ -37,12 +37,12 @@ function! VSHNewTerminalBuffer()
 		terminal
 		let g:terminal_buffer = bufnr('')
 		wincmd p
-		exec "resize -32" 
+		exec "resize -8" 
 	" split a new window if terminal buffer hidden
 	elseif bufwinnr(g:terminal_buffer) == -1
 		exec 'sbuffer ' . g:terminal_buffer
 		wincmd p
-		exec "resize -32" 
+		exec "resize -8" 
 	endif
 endfunction
 
