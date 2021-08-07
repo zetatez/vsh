@@ -105,26 +105,17 @@ login() {
 		inc=1
 	fi
 
-	now=$(date +%Y%m%d.vsh)
-	if ! [[ -e ~/.vsh/$now ]] 
-	then
-		touch ~/.vsh/$now
-	fi
-
-	cur=$(date +%Y%m%dT%H%M%S.vsh)
-	cp -f ~/.vsh/$now ~/.vsh/$cur
-
 	# open file at last line
+	cur=$(date +%Y%m%dT%H%M%S.vsh)
 	cmd="vim + ~/.vsh/$cur"
 
 	session="vsh-$inc"
 	tmux new -d -s $session
 	tmux send-keys -t $session "$cmd" ENTER
 	tmux attach -t $session
-	mv -f ~/.vsh/$cur ~/.vsh/$now
 
-	unset now
 	unset inc
+	unset cur
 	unset cmd
 	unset session
 	exit 0 
