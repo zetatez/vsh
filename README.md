@@ -3,8 +3,6 @@ VSH is a vim shell, a vim plugin! It's elegant and efficient.
 
 With VSH, we can take full advantage of the vim to interact with the terminal. We can edit the cmd in the vim editor and send it to the terminal just by pressing enter key. Furthermore, we can extend `vsh` with [ultisnips](https://github.com/SirVer/ultisnips) plugin by creating a bunch of snippets to achieve our own auto-completion.
 
-[BiliBili](https://b23.tv/437IxV)
-
 ![vsh](https://raw.githubusercontent.com/zetatez/vsh/main/pic/20210627022724.png)
 
 ### Requirements
